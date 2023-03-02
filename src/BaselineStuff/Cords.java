@@ -34,6 +34,14 @@ public class Cords {
         return false;
     }
 
+    public Cords getDiff(Cords other) {
+        return new Cords(row - other.row, col - other.col);
+    }
+
+    public double getMagnitude() {
+        return Math.pow((Math.pow(row,2)+Math.pow(col,2)),0.5);
+    }
+
     @Override
     public String toString() {
         return "["+row+"]"+"["+col+"]";

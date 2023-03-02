@@ -1,6 +1,5 @@
-package BaselineStuff;
-
 import BaselineStuff.BoardPieces;
+import BaselineStuff.Cords;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -11,6 +10,9 @@ public class Candy implements BoardPieces {
     private ImageIcon candyIcon = new ImageIcon("C:\\Users\\patelhar\\IdeaProjects\\CandyCrushSimulator\\ResourceFiles\\nullTile.png");
 
     private Cords location;
+
+    private Environment environment = null;
+
 
     public Candy(int candyNum) {
         candyType = candyNum;
@@ -28,8 +30,8 @@ public class Candy implements BoardPieces {
     }
 
 
-    public void setEnvironment() {
-
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
     }
 
     public int getCandyType() {
@@ -55,5 +57,20 @@ public class Candy implements BoardPieces {
     public void buttonClicked(ActionEvent evt) {
         System.out.println("Aye boy, u cluked on " + candyType);
 
+        if (environment != null) {
+            environment.gotClicked(this);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Candy of type " + candyType + " is at location " + location;
+    }
+
+    public Candy getCopy() {
+        Candy temp = new Candy(candyType);
+        temp.setLocation(location.getCopy());
+        temp.setEnvironment(environment);
+        return temp;
     }
 }

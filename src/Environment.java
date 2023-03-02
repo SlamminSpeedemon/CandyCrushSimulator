@@ -1,6 +1,8 @@
 import BaselineStuff.*;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Environment extends JFrame {
@@ -20,7 +22,7 @@ public class Environment extends JFrame {
 
     private JPanel keyListener; //get input
 
-    private Candy[] clickedCandies;
+    private ClickedContainer clickedCandies;
 
     public Environment(int rows, int cols) {
         board = new BoardPieces[rows][cols];
@@ -52,7 +54,7 @@ public class Environment extends JFrame {
         jButtss = new JButton[board.length][board[0].length];
         mainDisplayFrame = new JFrame();
 
-        clickedCandies = new Candy[2];
+        clickedCandies = new ClickedContainer();
 
         this.rows = rows;
         this.cols = cols;
@@ -94,6 +96,7 @@ public class Environment extends JFrame {
         mainDisplayFrame.setVisible(true);
         mainDisplayFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        gameEngine.setEnvironment(this);
     }
 
     public void updateComponents() throws InterruptedException {
@@ -134,6 +137,33 @@ public class Environment extends JFrame {
     }
 
     public void gotClicked(Candy clickedCandy) {
+        if (clickedCandies.clicked(clickedCandy)) {
+            //we have selected 2 or less candies and the candies have been added
+        } else {
+            //more than 2 have been selected or candy was not added
+            clickedCandies.clearClicked();
+        }
+
+        if (clickedCandies.getClickedCandies().size() == 2) {
+            //2 valid candies have been selected, see if they are next to each other
+            if (clickedCandies.areCandiesNextToEachOther()) {
+                //switch the candies
+
+                //TODO does not work
+                System.out.println("switiching candies");
+                Cords cord1 = clickedCandies.getClickedCandies().get(0).getLocation();
+                Cords cord2 = clickedCandies.getClickedCandies().get(1).getLocation();
+
+                Candy tempCandy = (Candy) board[cord1.row][cord1.col];
+                Candy temp = tempCandy.getCopy();
+                board[cord1.row][cord1.col] = ((Candy) board[cord2.row][cord2.col]).getCopy();
+                board[cord2.row][cord2.col] = temp;
+
+            } else {
+                clickedCandies.clearClicked();
+            }
+        }
+
 
     }
 

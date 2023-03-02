@@ -1,8 +1,6 @@
-package BaselineStuff;
-
-import javax.swing.text.ParagraphView;
-import java.lang.reflect.Parameter;
-
+import BaselineStuff.BackgroundNull;
+import BaselineStuff.BoardPieces;
+import BaselineStuff.Constants;
 
 public class BoardTopologySetUp {
     private int[][] topology; //a matrix where 1 represents valid candy tile, 0 represents background tile

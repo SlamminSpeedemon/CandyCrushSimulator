@@ -14,6 +14,7 @@ public class GameEngine {
     private Scanner wait;
 
     private ArrayList<BoardPieces> poppedSpecialtyCandies;
+    private Environment environment;
 
     public GameEngine(BoardPieces[][] board) {
         changedTiles = new ArrayList();
@@ -26,6 +27,10 @@ public class GameEngine {
         this.board = board;
     }
 
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
+        System.out.println("environment is set for game engine");
+    }
 
     public BoardPieces[][] matchFinder() {//after gravity, checkall
         System.out.println(board);
@@ -41,6 +46,12 @@ public class GameEngine {
                     //is a not defined board piece
                 } else {
                     tilesToCheck.add(new Cords(i,j));
+                    if (board[i][j].getClass() == Candy.class && environment != null) {
+                        //pass the environment in
+                        Candy tempCan = (Candy) board[i][j];
+                        tempCan.setEnvironment(environment);
+                        tempCan.setLocation(new Cords(i,j));
+                    }
                 }
             }
         }
