@@ -27,7 +27,7 @@ public interface BoardPieces {
 
     }
 
-    default void buttonClicked(java.awt.event.ActionEvent evt) {
+    default void buttonClicked(java.awt.event.ActionEvent evt) throws InterruptedException {
         System.out.println("button not defined");
     }
 

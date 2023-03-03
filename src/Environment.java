@@ -82,7 +82,11 @@ public class Environment extends JFrame {
                 int finalI = i;
                 jButtss[i][j].addActionListener(new java.awt.event.ActionListener() {
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        board[finalI][finalJ].buttonClicked(evt);
+                        try {
+                            board[finalI][finalJ].buttonClicked(evt);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
                 });
 
@@ -136,7 +140,7 @@ public class Environment extends JFrame {
         }
     }
 
-    public void gotClicked(Candy clickedCandy) {
+    public void gotClicked(Candy clickedCandy) throws InterruptedException {
         if (clickedCandies.clicked(clickedCandy)) {
             //we have selected 2 or less candies and the candies have been added
         } else {
@@ -149,7 +153,6 @@ public class Environment extends JFrame {
             if (clickedCandies.areCandiesNextToEachOther()) {
                 //switch the candies
 
-                //TODO does not work
                 System.out.println("switiching candies");
                 Cords cord1 = clickedCandies.getClickedCandies().get(0).getLocation();
                 Cords cord2 = clickedCandies.getClickedCandies().get(1).getLocation();
@@ -158,6 +161,8 @@ public class Environment extends JFrame {
                 Candy temp = tempCandy.getCopy();
                 board[cord1.row][cord1.col] = ((Candy) board[cord2.row][cord2.col]).getCopy();
                 board[cord2.row][cord2.col] = temp;
+
+                updateComponents();
 
             } else {
                 clickedCandies.clearClicked();

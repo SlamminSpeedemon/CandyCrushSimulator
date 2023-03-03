@@ -54,7 +54,7 @@ public class Candy implements BoardPieces {
     }
 
     @Override
-    public void buttonClicked(ActionEvent evt) {
+    public void buttonClicked(ActionEvent evt) throws InterruptedException {
         System.out.println("Aye boy, u cluked on " + candyType);
 
         if (environment != null) {

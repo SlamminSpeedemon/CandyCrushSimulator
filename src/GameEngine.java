@@ -170,7 +170,7 @@ public class GameEngine {
                 if (candySpecialtyType == 1) {//vertical stripes
                     System.out.println("\nVERTICAL POPPING! at " + poppedSpot);
                     printCandyArray();
-                    wait.nextLine();
+                    //wait.nextLine();
 
                     for (int j = 0; j < board.length; j++) {
                         if (board[j][poppedSpot.col].getCandyType() > 0) {
@@ -184,11 +184,11 @@ public class GameEngine {
 
                     System.out.println("\nVERTICAL POPPING DONE");
                     printCandyArray();
-                    wait.nextLine();
+                    //wait.nextLine();
                 } else if (candySpecialtyType == 2) {//horizontal stripes
                     System.out.println("\nHORIZONTAL POPPING! at " + poppedSpot);
                     printCandyArray();
-                    wait.nextLine();
+                    //wait.nextLine();
 
                     for (int j = 0; j < board.length; j++) {
                         if (board[poppedSpot.row][j].getCandyType() > 0) {
@@ -202,7 +202,7 @@ public class GameEngine {
 
                     System.out.println("\nHORIZONTAL POPPING DONE");
                     printCandyArray();
-                    wait.nextLine();
+                    //wait.nextLine();
                 }
             }
 

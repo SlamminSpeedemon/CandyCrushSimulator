@@ -9,10 +9,11 @@ public class Main {
         environment.updateComponents();
         //scan.nextLine();
         //environment.updateComponents();
-        while (true ) {
+        while (true) {
             scan.nextLine();
             System.out.println("running update");
             environment.updateComponents();
+
         }
 
 
